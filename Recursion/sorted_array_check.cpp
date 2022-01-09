@@ -2,32 +2,34 @@
 #include<vector>
 using namespace std;
 
-bool isSorted(vector<int>vec1){
+bool isSorted(int arr[],int n){
     
-    int n =vec1.size();
-    if(n==1)
+    if(n==1 || n==0)
     return true;
 
-    if(vec1[0]<vec1[1])
+    if(arr[0]<arr[1] && isSorted(arr+1,n-1))
     return true;
 
-    vector<int>vec2;
-     auto start = vec1.begin()+1;
-    auto end = vec1.begin() + 3;
-  
+    return false;
+
+
+}
+
+bool isSortedTwo(int arr[],int i,int n){
+
+   if(i==n-1)
+   return true;
+
+   if(arr[i]<arr[i+1] && isSortedTwo(arr,i+1,n))
+   return true;
+
+   return false;
 }
 
 int main()
 {
-   int n;
-   cin>>n;
+  int arr[]={1,2,3,5};
 
-   vector<int>vec1;
-
-   for(int i=0;i<n;i++){
-       int a;
-       cin>>a;
-       vec1.push_back(a);
-   }
-   cout<<isSorted(vec1);
+  cout<<isSorted(arr,5);
+  cout<<isSortedTwo(arr,0,5);
 }
